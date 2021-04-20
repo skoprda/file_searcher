@@ -2,7 +2,6 @@ package sk.koprda.utils;
 
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -25,7 +24,7 @@ public class FileSearchUtilTest {
                 testDir + "dir_b\\file_006"
         );
         try {
-            List<String> actualValues = FileSearchUtil.findAllfiles("src/test/resources/TestDirectory");
+            List<String> actualValues = FileSearchUtil.findAllFiles("src/test/resources/TestDirectory");
             expectedValues.sort(String::compareTo);
             actualValues.sort(String::compareTo);
             assertEquals(expectedValues, actualValues);
@@ -37,7 +36,7 @@ public class FileSearchUtilTest {
     @Test
     void testFindAllFiles_2() {
         try {
-            FileSearchUtil.findAllfiles("non-existing_dir");
+            FileSearchUtil.findAllFiles("non-existing_dir");
         } catch (DirectoryNotFoundException dnfe) {
             assertEquals("Given pathname doesn't match any directory!", dnfe.getMessage());
         }

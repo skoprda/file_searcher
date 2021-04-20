@@ -25,7 +25,7 @@ public class FileSearchUtil {
      * @return List of absolute pathnames of all files that are not directories in the file structure
      * @throws DirectoryNotFoundException when <b>dir</b> pathname is invalid
      */
-    public static ArrayList<String> findAllfiles(String dir) throws DirectoryNotFoundException {
+    public static ArrayList<String> findAllFiles(String dir) throws DirectoryNotFoundException {
         return traverseDirFilterSuitable(dir, (file) -> !file.isDirectory());
     }
 
