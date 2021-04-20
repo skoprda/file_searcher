@@ -42,7 +42,7 @@ public class App {
                         break;
                 }
             } catch(InputMismatchException ime){
-                System.out.println("Uncorrect option, try again!");
+                System.out.println("Incorrect option, try again!");
                 continue;
             } catch(DirectoryNotFoundException dnfe){
                 System.out.println("Invalid directory pathname");
@@ -55,12 +55,20 @@ public class App {
         }
     }
 
+    /**
+     * Prints user friendly output and asks for root directory
+     * @param sc scanner used for getting input from user
+     * @return root directory pathname
+     */
     private static String setRootDirectory(Scanner sc){
         System.out.println("Please specify a root directory you want to examine (absolute path): ");
         System.out.println("Example: \"C:\\directory_1\\directory_2\"");
         return sc.nextLine();
     }
 
+    /**
+     * Prints options that can be done with application
+     */
     private static void printOptions(){
         System.out.println("-(1) Print all files in root directory");
         System.out.println("-(2) Print all directories in root directory");
@@ -70,23 +78,42 @@ public class App {
         System.out.print("Your choice(1/2/3/4/5): ");
     }
 
+    /**
+     * Prettify the result of each method from FileSearchUtil
+     * @param result List of Strings returned by FileSearchUtil methods
+     */
     private static void prettify(List<String> result){
         for(int i = 0; i < result.size(); i++){
             System.out.println((i+1) + ". " + result.get(i));
         }
     }
 
+    /**
+     * Handle situation when user select to print all files
+     * @param rootDirectory directory used as a parameter in findAllFilesMethod
+     * @throws DirectoryNotFoundException when <b>rootDirectory</b> is not valid pathname
+     */
     private static void handleAllFiles(String rootDirectory) throws DirectoryNotFoundException{
         List<String> result = FileSearchUtil.findAllFiles(rootDirectory);
         prettify(result);
     }
 
-
+    /**
+     * Handle situation when user select to print all directories
+     * @param rootDirectory directory used as a parameter in findAllDirectories method
+     * @throws DirectoryNotFoundException when <b>rootDirectory</b> is not valid pathname
+     */
     private static void handleAllDirectories(String rootDirectory) throws DirectoryNotFoundException{
         List<String> result = FileSearchUtil.findAllDirectories(rootDirectory);
         prettify(result);
     }
 
+    /**
+     * Hanlde situation when user select to print files specified by some pattern
+     * @param rootDirectory directory used as a parameter in findFilesByPattern method
+     * @param sc Scanner object used for getting input (pattern) from user
+     * @throws DirectoryNotFoundException when <b>rootDirectory</b> is not valid pathname
+     */
     private static void handlePatternMatchOption(String rootDirectory, Scanner sc) throws DirectoryNotFoundException{
         String pattern = "";
         System.out.println("? - any single character");
@@ -97,6 +124,13 @@ public class App {
         prettify(result);
     }
 
+    /**
+     * Handle situation when user select to print files specified by last modification date and time
+     * @param rootDirectory directory used as a parameter in findFilesByLastChange method
+     * @param sc Scanner object used for getting input (date and time) from user
+     * @throws DirectoryNotFoundException when <b>rootDirectory</b> is not valid pathname
+     * @throws DateTimeParseException when date and time format is not valid
+     */
     private static void handleLastModifiedOption(String rootDirectory, Scanner sc)
             throws DirectoryNotFoundException, DateTimeParseException{
         String dateString ="";
